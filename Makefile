@@ -20,7 +20,7 @@ $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
 DEPS = $(OBJS:.o=.d)
 
-all: power_export test_noise
+all: power_export test_noise noise_export
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -34,6 +34,8 @@ power_export: tools/power_export.c $(OBJS)
 test_noise: tests/test_noise.c build/noise.o
 	$(CC) $(CFLAGS) $^ -o $@
 
+noise_export: tools/noise_export.c build/noise.o
+	$(CC) $(CFLAGS) $^ -o $@
 
 -include $(DEPS)
 
@@ -41,6 +43,7 @@ clean:
 	rm -rf $(BUILD_DIR)
 	rm -f power_export
 	rm -f test_noise
+	rm -f noise_export
 
 
 .PHONY: all clean
