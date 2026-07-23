@@ -25,7 +25,7 @@ $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)
 
 
-all: power_export test_noise noise_export
+all: power_export test_noise noise_export test_preamble_skeleton
 
 
 $(BUILD_DIR):
@@ -40,26 +40,22 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
 
 
 # Existing tool
-
 power_export: tools/power_export.c $(OBJS)
-
 	$(CC) $(CFLAGS) $^ -o $@
 
 
 # Noise visualization tool
-
 noise_export: tools/noise_export.c $(BUILD_DIR)/noise.o
-
 	$(CC) $(CFLAGS) $^ -o $@
-
 
 
 # Noise unit test
-
 test_noise: tests/test_noise.c $(BUILD_DIR)/noise.o
-
 	$(CC) $(CFLAGS) $^ -o $@
 
+#preamble skleton test
+test_preamble_skeleton: tests/test_preamble_skeleton.c $(BUILD_DIR)/preamble_skeleton.o
+	$(CC) $(CFLAGS) $^ -o $@
 
 -include $(DEPS)
 
