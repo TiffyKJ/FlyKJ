@@ -1,3 +1,5 @@
+//for testing.仅用于测试。
+
 #include <stdio.h>
 #include <stdint.h>
 #include "types.h"
