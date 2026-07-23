@@ -7,9 +7,8 @@ High-performance C++ Mode S/ADS-B receiver for RTL-SDR on ARM64 Linux, featuring
 
 RF Layer
 ---------
-RTL-SDR
-   |
-   v
+RTL-SDR 
+to
 IQ Samples
 
 
