@@ -12,6 +12,8 @@ uint32_t power_calc_sample(IQSample sample)
      *
      * Remove DC offset.
      */
+    //despcription giving by ai
+    
     int16_t i_signed = (int16_t)sample.i - 128;
     int16_t q_signed = (int16_t)sample.q - 128;
 
