@@ -1,6 +1,6 @@
-CC=gcc
+CC = gcc
 
-CFLAGS=\
+CFLAGS = \
 -Wall \
 -Wextra \
 -O2 \
@@ -10,38 +10,37 @@ CFLAGS=\
 -MP
 
 
-SRC_DIR=src
-BUILD_DIR=build
+SRC_DIR = src
+BUILD_DIR = build
 
-SRCS=$(wildcard $(SRC_DIR)/*.c)
+SRCS = $(wildcard $(SRC_DIR)/*.c)
 
-OBJS=$(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+OBJS = \
+$(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
-DEPS=$(OBJS:.o=.d)
+DEPS = $(OBJS:.o=.d)
 
-all: power_export
+all: power_export test_noise
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
-
-	$(CC) $(CFLAGS) \
-	-c $< \
-	-o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 power_export: tools/power_export.c $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $@
 
-	$(CC) $(CFLAGS) \
-	$< \
-	$(OBJS) \
-	-o $@
+test_noise: tests/test_noise.c build/noise.o
+	$(CC) $(CFLAGS) $^ -o $@
+
 
 -include $(DEPS)
 
 clean:
 	rm -rf $(BUILD_DIR)
 	rm -f power_export
-	rm -f power.bin
+	rm -f test_noise
+
 
 .PHONY: all clean
