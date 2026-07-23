@@ -35,7 +35,8 @@ Application Layer
 -----------------
 TC Dispatcher
 
- |----------|----------|
+ |------------|------------|
+ 
 Callsign   Position   Velocity
 
                 |
